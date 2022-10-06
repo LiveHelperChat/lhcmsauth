@@ -79,6 +79,13 @@ if ($sessionData) {
     $sessionData->completed = 1;
     $sessionData->saveThis();
 
+    // User is disabled. Remove authenticated record.
+    if ($sessionData->user_id > 0 && erLhcoreClassModelUser::getCount(['filter' => ['id' => $sessionData->user_id, 'disabled' => 1]]) > 0) {
+        $sessionData->removeThis();
+        erLhcoreClassModule::redirect('user/login');
+        exit;
+    }
+
     if ($sessionData->user_id == 0) {
         if (erLhcoreClassUser::instance()->isLogged()) {
             $sessionData->user_id = erLhcoreClassUser::instance()->getUserID();

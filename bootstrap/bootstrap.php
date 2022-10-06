@@ -25,6 +25,21 @@ class erLhcoreClassExtensionLhcmsauth {
             $this,
             'loginSuccess'
         ));
+
+        $dispatcher->listen('user.deleted', array(
+            $this,
+            'userDelete'
+        ));
+
+    }
+
+    public function userDelete($params)
+    {
+        // Delete user
+        $q = ezcDbInstance::get()->createDeleteQuery();
+        $q->deleteFrom( 'lhc_ms_auth' )->where( $q->expr->eq( 'user_id', $q->bindValue($params['userData']->id) ) );
+        $stmt = $q->prepare();
+        $stmt->execute();
     }
 
     public function loginSuccess($params)
