@@ -16,6 +16,9 @@ if ( isset($_POST['StoreOptions']) ) {
         ),
         'ms_secret' => new ezcInputFormDefinitionElement(
             ezcInputFormDefinitionElement::OPTIONAL, 'unsafe_raw'
+        ),
+        'ms_auto_login' => new ezcInputFormDefinitionElement(
+            ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
         )
     );
 
@@ -32,6 +35,12 @@ if ( isset($_POST['StoreOptions']) ) {
         $data['ms_client_id'] = $form->ms_client_id;
     } else {
         $data['ms_client_id'] = '';
+    }
+    
+    if ( $form->hasValidData( 'ms_auto_login' )) {
+        $data['ms_auto_login'] = 1;
+    } else {
+        $data['ms_auto_login'] = 0;
     }
 
     if ( $form->hasValidData( 'ms_secret' )) {

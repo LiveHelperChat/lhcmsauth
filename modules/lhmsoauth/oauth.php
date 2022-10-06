@@ -62,10 +62,18 @@ if ($sessionData) {
         $sessionData->user_id = $presentSession->user_id;
     }
 
+    // Auto login enabled for first time users
+    if (!erLhcoreClassUser::instance()->isLogged() && $sessionData->user_id == 0 && isset($data['ms_auto_login']) && $data['ms_auto_login'] == 1) {
+        $userExisting = erLhcoreClassModelUser::findOne(['filter' => ['email' => (string)$profile->mail]]);
+        if ($userExisting instanceof erLhcoreClassModelUser) {
+            $sessionData->user_id = $userExisting->id;
+        }
+    }
+
     $sessionData->oauth_uid = (string)$profile->id;
     $sessionData->display_name = (string)$profile->displayName;
     $sessionData->surname = (string)$profile->surname;
-    $sessionData->email = (string)$profile->userPrincipalName;
+    $sessionData->email = (string)$profile->mail;
     $sessionData->completed = 1;
     $sessionData->saveThis();
 

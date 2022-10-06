@@ -23,6 +23,10 @@
         <input class="form-control form-control-sm" type="text" name="ms_secret" value="<?php (isset($ms_options['ms_secret'])) ? print htmlspecialchars($ms_options['ms_secret']) : print ''?>" />
     </div>
 
+    <div class="form-group">
+        <label><input type="checkbox" name="ms_auto_login" <?php (isset($ms_options['ms_auto_login']) && $ms_options['ms_auto_login'] == 1) ? print 'checked="checked"' : print ''?> value="on">&nbsp;<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('module/msauth','Automatically login first time user if logged user e-mail is found.')?></label>
+    </div>
+
     <input type="submit" class="btn btn-secondary" name="StoreOptions" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/buttons','Save'); ?>" />
 
 </form>
