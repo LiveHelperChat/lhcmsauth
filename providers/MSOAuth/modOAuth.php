@@ -11,7 +11,7 @@ namespace LiveHelperChatExtension\lhcmsauth\providers\MSOAuth;
  * https://twitter.com/coaster_katy
  *
  */
-
+#[\AllowDynamicProperties]
 class modOAuth
 {
     private $settings = null;

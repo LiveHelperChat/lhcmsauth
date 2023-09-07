@@ -1,5 +1,5 @@
 <?php
-
+#[\AllowDynamicProperties]
 class erLhcoreClassExtensionLhcmsauth {
 
     public function __construct() {

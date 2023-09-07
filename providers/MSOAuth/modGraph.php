@@ -12,7 +12,7 @@ namespace LiveHelperChatExtension\lhcmsauth\providers\MSOAuth;
  *
  * Sample class to retrieve data through Graph API once logged in
  */
-
+#[\AllowDynamicProperties]
 class modGraph
 {
     var $token;
